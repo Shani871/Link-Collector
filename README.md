@@ -1,15 +1,19 @@
-# Link Collector
+# 🌐 Link Collector
 
 Link Collector is a Django-based web application that allows users to enter a website URL and scrape all the related links from that website. The collected links are displayed in a table, making it easy to view and access them.
 
-## Features
+---
 
-- **Input URL:** Enter a website URL to scrape related links.
-- **Link Display:** View all the links in a table format.
-- **Delete Functionality:** Clear all the stored links with a single click.
-- **Responsive Design:** Fully responsive UI built with Bootstrap 5.
+## ✨ Features
 
-## Installation
+- 🔗 **Input URL:** Enter a website URL to scrape related links.
+- 📋 **Link Display:** View all the links in a table format.
+- 🗑️ **Delete Functionality:** Clear all the stored links with a single click.
+- 📱 **Responsive Design:** Fully responsive UI built with Bootstrap 5.
+
+---
+
+## ⚙️ Installation
 
 Follow these steps to set up the project locally:
 
@@ -49,55 +53,53 @@ Follow these steps to set up the project locally:
    http://127.0.0.1:8000
    ```
 
-## Usage
+---
 
-1. Enter the URL of the website you want to scrape in the input field.
-2. Click the **Scrape** button to fetch all related links.
-3. View the links displayed in the table.
-4. Use the **Delete All** button to clear all the stored links.
+## 🛠️ Usage
 
-## Project Structure
+1. 🌍 Enter the URL of the website you want to scrape in the input field.
+2. 🖱️ Click the **Scrape** button to fetch all related links.
+3. 📄 View the links displayed in the table.
+4. 🗑️ Use the **Delete All** button to clear all the stored links.
 
-```
-Link-Collector/
-├── link_collector/       # Main Django app
-├── manage.py             # Django management script
-├── templates/            # HTML templates
-├── static/               # Static files (CSS, JS, etc.)
-├── requirements.txt      # Python dependencies
-└── README.md             # Project documentation
-```
+---
 
-## Technologies Used
+## 🧰 Technologies Used
 
-- **Backend:** Django
-- **Frontend:** HTML, CSS, Bootstrap 5
-- **Scraping:** BeautifulSoup (if used for scraping links)
+- **Backend:** Django 🐍
+- **Frontend:** HTML, CSS, Bootstrap 5 🎨
+- **Scraping:** BeautifulSoup (if used for scraping links) 🕵️‍♂️
 
-## Contributing
+---
+
+## 🤝 Contributing
 
 Contributions are welcome! Please follow these steps:
 
-1. Fork the repository.
-2. Create a new branch for your feature:
+1. 🍴 Fork the repository.
+2. 🌱 Create a new branch for your feature:
    ```bash
    git checkout -b feature-name
    ```
-3. Commit your changes:
+3. 💾 Commit your changes:
    ```bash
    git commit -m "Add feature description"
    ```
-4. Push to your branch:
+4. 🚀 Push to your branch:
    ```bash
    git push origin feature-name
    ```
-5. Open a pull request.
+5. 📝 Open a pull request.
 
-## License
+---
+
+## 📜 License
 
 This project is licensed under the [MIT License](LICENSE).
 
-## Contact
+---
+
+## 📞 Contact
 
 For any inquiries or feedback, please contact:
 
