@@ -106,3 +106,6 @@ For any inquiries or feedback, please contact:
 - **Name:** Shani871
 - **GitHub:** [https://github.com/Shani871](https://github.com/Shani871)
 
+
+
+<img src="https://github.com/Shani871/Link-Collector/blob/main/templates/Screenshot%202025-01-21%20at%2011.20.12%E2%80%AFPM.png" alt="Dashboard Screenshot" width="600">
