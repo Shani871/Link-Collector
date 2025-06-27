@@ -1,13 +1,9 @@
-Here’s a redesigned and modernized version of your README.md file for the Link Collector project — clean, well-structured, and visually appealing:
 
-⸻
 
 
 # 🌐 Link Collector
 
 **Link Collector** is a Django-powered web application that lets users scrape and collect all the hyperlinks from any given website URL. It displays the links in a structured table format, with options to delete them easily. Designed with Bootstrap 5, the app is fully responsive and user-friendly.
-
-🔗 **Live Preview** (if deployed): *[Add your Netlify/Render link here]*
 
 ---
 
@@ -102,21 +98,4 @@ Licensed under the MIT License — free to use, modify, and distribute.
 
 Shani Chauhan
 📧 chauhanshani145@gmail.com
-🔗 GitHub
-🔗 LinkedIn
 
-⸻
-
-
----
-
-### ✅ What’s Improved:
-- Cleaner layout and sections
-- Centered screenshot
-- Consistent emoji use and section spacing
-- Optional live link section at the top
-
-Let me know if you want to:
-- Add a **live link**
-- Include a **GIF demo**
-- Add badges (e.g., Python version, license, stars, etc.)
