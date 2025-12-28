@@ -21,6 +21,7 @@ from myapp import views
 
 urlpatterns = [
         path('admin/', admin.site.urls),
-        path('',views.scrape,name='scrape'),
-        path('delete/',views.clear,name='clear'),
+        path('', views.scrape, name='scrape'),
+        path('delete/', views.clear, name='clear'),
+        path('export/', views.export_links, name='export'),
 ]

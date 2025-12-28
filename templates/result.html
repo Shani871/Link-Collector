@@ -1,135 +1,288 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="dark">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Link Collector</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkSense | Modern Link Intelligence</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        glass: 'rgba(255, 255, 255, 0.05)',
+                        'glass-dark': 'rgba(0, 0, 0, 0.2)',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
-            background-color: #eef2f7;
-            font-family: 'Arial', sans-serif;
-            color: #4a4a4a;
+            background: radial-gradient(circle at top right, #0c4a6e 0%, #020617 100%);
+            min-height: 100vh;
         }
-
-        .container {
-            background-color: #ffffff;
-            border-radius: 12px;
-            padding: 40px;
-            margin-top: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
         }
-
-        h1 {
-            color: #1d3557;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 30px;
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
         }
-
-        .form-label {
-            font-weight: 600;
-            color: #2b2d42;
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
-
-        .btn-primary {
-            background-color: #457b9d;
-            border: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-primary:hover {
-            background-color: #1d3557;
-        }
-
-        .btn-warning {
-            background-color: #f4a261;
-            border: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-warning:hover {
-            background-color: #e76f51;
-        }
-
-        .table th, .table td {
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .table-bordered {
-            border: 1px solid #dee2e6;
-        }
-
-        .table-light {
-            background-color: #f1faee;
-        }
-
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .form-container form {
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .table {
-            margin-top: 30px;
-        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
     </style>
 </head>
-<body>
+<body class="text-slate-200 font-sans selection:bg-primary-500/30">
 
-<div class="container">
-    <h1>Link Collector</h1>
-    <div class="form-container">
-        <form method="post" action="/">
-            {% csrf_token %}
-            <div class="mb-4">
-                <label for="site" class="form-label">Enter the Site</label>
-                <input class="form-control form-control-lg" type="text" id="site" name="site" placeholder="Enter the site URL" required>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+            <div>
+                <h1 class="font-outfit text-4xl font-bold bg-gradient-to-r from-white via-primary-200 to-primary-500 bg-clip-text text-transparent">
+                    LinkSense <span class="text-white">v2.0</span>
+                </h1>
+                <p class="text-slate-400 mt-2 font-light">Intelligent Web Link Extraction & Analysis</p>
             </div>
-            <div class="buttons">
-                <button class="btn btn-primary btn-lg" type="submit">Scrape</button>
-                <a class="btn btn-warning btn-lg" href="{% url 'clear' %}">Delete All</a>
+            
+            <div class="flex items-center gap-4">
+                <a href="{% url 'export' %}" class="bg-blue-600/20 hover:bg-blue-600/40 border border-blue-500/30 text-blue-300 px-5 py-2.5 rounded-xl transition-all flex items-center gap-2 group">
+                    <i class="fa-solid fa-download group-hover:translate-y-0.5 transition-transform"></i>
+                    Export CSV
+                </a>
+                <button onclick="document.getElementById('stats-modal').classList.remove('hidden')" class="bg-primary-500 hover:bg-primary-600 text-white px-6 py-2.5 rounded-xl shadow-lg shadow-primary-500/20 transition-all font-medium flex items-center gap-2">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    View Insight
+                </button>
             </div>
-        </form>
+        </header>
+
+        <!-- Search & Scrape Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div class="lg:col-span-2 glass-card p-6 flex flex-col justify-center">
+                <form method="post" action="{% url 'scrape' %}" class="relative group">
+                    {% csrf_token %}
+                    <label for="site" class="block text-sm font-medium text-slate-400 mb-3 ml-2">Analyze Website URL</label>
+                    <div class="relative">
+                        <input type="text" id="site" name="site" placeholder="https://example.com" required
+                               class="w-full bg-black/40 border border-slate-700/50 rounded-2xl py-4 pl-12 pr-32 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all text-white placeholder:text-slate-600">
+                        <i class="fa-solid fa-globe absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+                        <button type="submit" class="absolute right-2 top-2 bottom-2 bg-gradient-to-r from-primary-600 to-primary-500 hover:from-primary-500 hover:to-primary-400 text-white px-6 rounded-xl font-semibold transition-all shadow-lg active:scale-95 flex items-center gap-2">
+                            <span>Scrape</span>
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Dashboard Stats -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="glass-card p-5 text-center flex flex-col items-center justify-center">
+                    <div class="w-12 h-12 bg-primary-500/10 rounded-full flex items-center justify-center text-primary-400 mb-3">
+                        <i class="fa-solid fa-link text-xl"></i>
+                    </div>
+                    <span class="text-xs text-slate-400 uppercase tracking-widest font-bold">Total Links</span>
+                    <h3 class="text-3xl font-outfit font-bold text-white mt-1">{{ total_links }}</h3>
+                </div>
+                <div class="glass-card p-5 text-center flex flex-col items-center justify-center group cursor-pointer" onclick="document.getElementById('delete-modal').classList.remove('hidden')">
+                    <div class="w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center text-red-500 mb-3 transition-colors group-hover:bg-red-500 group-hover:text-white">
+                        <i class="fa-solid fa-trash-can text-xl"></i>
+                    </div>
+                    <span class="text-xs text-slate-400 uppercase tracking-widest font-bold">Clear All</span>
+                    <h3 class="text-sm font-medium text-slate-300 mt-2">Reset Database</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Links Table Section -->
+        <div class="glass-card overflow-hidden">
+            <div class="px-6 py-5 border-b border-slate-700/50 flex items-center justify-between">
+                <h2 class="font-outfit text-xl font-semibold text-white">Extracted Links Feed</h2>
+                <div class="relative w-64">
+                    <input type="text" id="table-search" placeholder="Search resources..." 
+                           class="w-full bg-black/20 border border-slate-700/50 rounded-xl py-2 pl-10 pr-4 text-sm focus:outline-none focus:ring-1 focus:ring-primary-500/50 transition-all">
+                    <i class="fa-solid fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left" id="links-table">
+                    <thead>
+                        <tr class="bg-white/5 text-slate-400 uppercase text-[11px] font-bold tracking-widest">
+                            <th class="px-6 py-4">Status</th>
+                            <th class="px-6 py-4">Resource Info</th>
+                            <th class="px-6 py-4">Category</th>
+                            <th class="px-6 py-4">Domain</th>
+                            <th class="px-6 py-4">Captured</th>
+                            <th class="px-6 py-4 text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/50">
+                        {% for link in data %}
+                        <tr class="hover:bg-white/5 transition-colors group">
+                            <td class="px-6 py-5">
+                                <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.5)]"></div>
+                            </td>
+                            <td class="px-6 py-5">
+                                <span class="block text-white font-medium text-sm group-hover:text-primary-400 transition-colors">{{ link.name }}</span>
+                                <span class="block text-slate-500 text-[11px] font-mono mt-1 break-all max-w-sm">{{ link.address }}</span>
+                            </td>
+                            <td class="px-6 py-5">
+                                <span class="px-3 py-1 bg-slate-800 text-slate-300 text-[10px] font-bold rounded-full border border-slate-700">
+                                    {{ link.category }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-5">
+                                <span class="text-xs text-slate-400">{{ link.domain }}</span>
+                            </td>
+                            <td class="px-6 py-5">
+                                <span class="text-xs text-slate-500">{{ link.created_at|timesince }} ago</span>
+                            </td>
+                            <td class="px-6 py-5 text-right">
+                                <a href="{{ link.address }}" target="_blank" class="text-primary-400 hover:text-primary-300 transition-colors p-2 bg-primary-400/10 rounded-lg">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="6" class="px-6 py-20 text-center">
+                                <div class="flex flex-col items-center opacity-40">
+                                    <i class="fa-solid fa-box-open text-5xl mb-4"></i>
+                                    <p class="text-lg">No links collected yet system-wide.</p>
+                                    <p class="text-sm mt-1">Start by analyzing a URL above.</p>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <div class="table-responsive mt-5">
-        <table class="table table-bordered">
-            <thead class="table-light">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Link</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for link in data %}
-                <tr>
-                    <td>{{ link.id }}</td>
-                    <td>{{ link.name }}</td>
-                    <td>
-                        <a href="{{ link.address }}" target="_blank" class="text-decoration-none">{{ link.address }}</a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+    <!-- Statistics Modal -->
+    <div id="stats-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="glass-card max-w-2xl w-full p-8 relative overflow-hidden">
+            <button onclick="document.getElementById('stats-modal').classList.add('hidden')" class="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-2xl font-outfit font-bold text-white mb-8 border-b border-white/10 pb-4">Content Intelligence</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="h-64">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+                <div class="space-y-4">
+                    <h4 class="text-sm font-bold uppercase tracking-wider text-slate-400 mb-4">Top Domains & Trends</h4>
+                    <p class="text-sm text-slate-300 leading-relaxed">
+                        Extracted <span class="text-primary-400 font-bold">{{ total_links }}</span> unique reference points from recent analysis. Most data points are classified under the categories shown in the visual distribution.
+                    </p>
+                    <div class="p-4 bg-primary-500/10 border border-primary-500/20 rounded-xl">
+                        <p class="text-xs text-primary-300 font-medium">Pro Insight: Analyzing diverse domains improves semantic search relevance across collections.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="glass-card max-w-md w-full p-8 text-center">
+            <div class="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center text-red-500 mx-auto mb-6">
+                <i class="fa-solid fa-triangle-exclamation text-3xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-white mb-2">Purge Data?</h3>
+            <p class="text-slate-400 mb-8">This action will permanently delete all collected links from the database. This cannot be undone.</p>
+            <div class="flex gap-4">
+                <button onclick="document.getElementById('delete-modal').classList.add('hidden')" class="flex-1 px-6 py-3 bg-white/5 hover:bg-white/10 rounded-xl transition-all border border-white/10 text-slate-300 font-medium">Cancel</button>
+                <a href="{% url 'clear' %}" class="flex-1 px-6 py-3 bg-red-600 hover:bg-red-500 rounded-xl transition-all font-semibold text-white shadow-lg shadow-red-600/20">Yes, Clear All</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Table Search Logic
+        document.getElementById('table-search').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#links-table tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        });
+
+        // Initialize Charts
+        const ctx = document.getElementById('categoryChart').getContext('2d');
+        const catLabels = {{ cat_labels|safe }};
+        const catCounts = {{ cat_counts|safe }};
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: catLabels,
+                datasets: [{
+                    data: catCounts,
+                    backgroundColor: [
+                        '#0ea5e9', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#64748b'
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: '#94a3b8',
+                            usePointStyle: true,
+                            font: {
+                                size: 10,
+                                family: 'Inter'
+                            }
+                        }
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+    </script>
 </body>
 </html>

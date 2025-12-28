@@ -1,26 +1,33 @@
 
+# 🌐 LinkSense v2.0 - Link Intelligence
 
-
-# 🌐 Link Collector
-
-**Link Collector** is a Django-powered web application that lets users scrape and collect all the hyperlinks from any given website URL. It displays the links in a structured table format, with options to delete them easily. Designed with Bootstrap 5, the app is fully responsive and user-friendly.
+**LinkSense** is a modernized, Django-powered web application designed for intelligent web link extraction and semantic analysis. It goes beyond simple scraping by categorizing links, analyzing domains, and providing visual insights into web content structures.
 
 ---
 
-## ✨ Features
+## ✨ Features (v2.0)
 
-- 🔍 **URL Scraper** – Input any website URL to extract all related hyperlinks.
-- 📄 **Tabular Display** – View the scraped links in a clean, organized table.
-- 🗑️ **Delete All** – Remove all scraped links with one click.
-- 📱 **Mobile Friendly** – Built with Bootstrap 5 for responsive design.
+- 🔍 **Intelligent Scraper** – Extract all hyperlinks with full absolute path resolution.
+- 🏷️ **Auto-Categorization** – Automatically classifies links into Social Media, Blogs, E-commerce, Documentation, and more.
+- 📊 **Insight Dashboard** – Visual distribution of link categories using Chart.js.
+- 🌫️ **Modern UI** – Premium Glassmorphism design with Tailwind CSS and Dark Mode.
+- 🔎 **Real-time Search** – Filter through hundreds of links instantly.
+- 📥 **Data Export** – Download your collected links in CSV format for offline analysis.
+- 🗑️ **Data Management** – Single-click database purging with confirmation.
 
 ---
 
-## 📸 Screenshot
+## 📸 Screenshots
 
 <p align="center">
-  <img src="https://github.com/Shani871/Link-Collector/blob/main/templates/Screenshot%202025-01-21%20at%2011.20.12%E2%80%AFPM.png" alt="Dashboard Screenshot" width="80%">
+  <img src="dashboard_main.png" alt="Main Dashboard" width="90%">
 </p>
+<p align="center"><em>The modern, dark-themed dashboard showing extracted links with categories.</em></p>
+
+<p align="center">
+  <img src="dashboard_insights.png" alt="Insights Modal" width="90%">
+</p>
+<p align="center"><em>Deep content intelligence showing the distribution of link types.</em></p>
 
 ---
 
@@ -34,68 +41,40 @@ git clone https://github.com/Shani871/Link-Collector.git
 cd Link-Collector
 
 # 2. Set up virtual environment
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # 3. Install dependencies
 pip install -r requirements.txt
 
 # 4. Apply migrations
-python manage.py migrate
+python3 manage.py makemigrations
+python3 manage.py migrate
 
 # 5. Run the development server
-python manage.py runserver
+python3 manage.py runserver
+```
 
-🌐 Visit http://127.0.0.1:8000 in your browser.
+🌐 Visit `http://127.0.0.1:8000` in your browser.
 
-⸻
+---
 
-🧑‍💻 How to Use
-	1.	Paste a valid website URL in the input box.
-	2.	Click the Scrape button to fetch all related links.
-	3.	View the links displayed in a scrollable table.
-	4.	Use the Delete All button to clear them from the database.
+## 🛠️ Tech Stack
 
-⸻
+| Layer | Technologies |
+| :--- | :--- |
+| **Backend** | Django 6.0 (Python) |
+| **Scraping** | BeautifulSoup4, Requests |
+| **Frontend** | Tailwind CSS (Glassmorphism), Chart.js, Font Awesome 6 |
+| **Database** | SQLite3 |
 
-🛠️ Tech Stack
+---
 
-Layer	Technologies
-Backend	Django (Python)
-Scraping	BeautifulSoup (for HTML parsing)
-Frontend	HTML, CSS, Bootstrap 5
+## 👤 Author
 
+**Shani Chauhan**  
+📧 [chauhanshani145@gmail.com](mailto:chauhanshani145@gmail.com)  
 
-⸻
+---
 
-🤝 Contributing
-
-We welcome contributions from the community!
-Follow these steps to contribute:
-
-# Fork the repository
-# Create your feature branch
-git checkout -b feature/your-feature
-
-# Commit your changes
-git commit -m "Add feature"
-
-# Push to your branch
-git push origin feature/your-feature
-
-# Open a pull request
-
-
-⸻
-
-📜 License
-
-Licensed under the MIT License — free to use, modify, and distribute.
-
-⸻
-
-👤 Author
-
-Shani Chauhan
-📧 chauhanshani145@gmail.com
-
+Licensed under the MIT License.
